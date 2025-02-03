@@ -1,0 +1,2 @@
+# ShopWaves
+Automate a shop
