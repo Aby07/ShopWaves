@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <!-- Header -->
     <div class="header">
         <div class="container">
             {% include 'menubar.html' %}
@@ -82,6 +83,9 @@
             }
         }
     </script>
+
+    {% block scripts %}
+    {% endblock scripts %}
 
 </body>
 
