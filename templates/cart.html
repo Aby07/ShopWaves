@@ -6,5 +6,17 @@
 
 <!-- Content Block -->
 {% block content %}
+
+{% if messages %}
+<div class="message-container">
+    {% for msg in messages %}
+        <div class="message {{ msg.tags }}">
+            {{ msg }}
+        </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
 {% include 'cart_details.html' %} 
 {% endblock content %}

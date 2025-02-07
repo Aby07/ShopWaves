@@ -37,6 +37,7 @@ def show_account(request):
 
             #create customer object using user object
             customer=Customer.objects.create(
+                name=username,
                 user=user,
                 address=address,
                 phone=phoneno

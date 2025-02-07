@@ -17,4 +17,3 @@ def chunks(lst, chunk_size):
     if chunk:
         yield chunk
     
-    
