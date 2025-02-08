@@ -1,0 +1,28 @@
+{% load static %}
+{% load order_status_tag %}
+
+
+<div class="small-container cart-page">
+    {% if order %}
+    <table>
+        <tbody><tr>
+            <th>Order</th>
+            <th>Date</th>
+            <th>Total Price</th>
+            <th>Status</th>
+        </tr>
+        {% for odr in order %}
+        <tr>
+            <td>{{ odr.id }}</td>
+            <td>{{ odr.created_at }}</td>
+            <td>{{ odr.total }}</td>
+            <td>{% order_status odr.order_status %}</td>
+        </tr>
+        {% endfor %}
+    </tbody></table>
+
+    {% else %}
+    <p>No order found.</p>
+    {% endif %}
+
+</div>

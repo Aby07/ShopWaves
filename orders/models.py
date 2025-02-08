@@ -18,6 +18,7 @@ class Order(models.Model):
     ORDER_DELIVERED=3
     ORDER_REJECTED=4
     STATUS_CHOICES=(
+        (ORDER_CONFIRMED, 'ORDER_CONFIRMED'),
         (ORDER_PROCESSED, 'ORDER_PROCESSED'),
         (ORDER_DELIVERED, 'ORDER_DELIVERED'),
         (ORDER_REJECTED, 'ORDER_REJECTED'),
@@ -28,6 +29,7 @@ class Order(models.Model):
     delete_status=models.IntegerField(choices=DELETE_CHOICES, default=LIVE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    total=models.FloatField(default=0)
     
     def __str__(self):
         return "order-{}-{}".format(self.id,self.owner.name)
@@ -47,4 +49,5 @@ class OrderedItem(models.Model):
     size = models.CharField(max_length=3, choices=SIZE_CHOICES, default='M')
     owner=models.ForeignKey(Order, on_delete=models.CASCADE, related_name='added_items')
 
-
+    def __str__(self):
+        return "OrderedItem-{}-{}-{}".format(self.id, self.product, self.owner.id)

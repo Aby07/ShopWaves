@@ -42,6 +42,7 @@ def checkout_cart(request):
             )
             if order_obj:
                 order_obj.order_status = Order.ORDER_CONFIRMED
+                order_obj.total = total
                 order_obj.save()
                 status_message = "Your Order Is Proceeed."
                 messages.success(request, status_message)
@@ -52,7 +53,6 @@ def checkout_cart(request):
         except Exception as e:
                 status_message = "Error Occured"
                 messages.error(request, status_message)
-    
     return redirect('show_cart')
 
 @login_required(login_url='/account/')
@@ -71,7 +71,6 @@ def add_to_cart(request):
 
         product_obj = get_object_or_404(Product, id=product_id)
         product=Product.objects.get(pk=product_id)
-        print('productproduct', product)
 
         ordered_item, created=OrderedItem.objects.get_or_create(
             product=product,
@@ -86,3 +85,13 @@ def add_to_cart(request):
             ordered_item.save()
 
         return redirect('show_cart')
+    
+@login_required(login_url='/account/')
+def track_order(request):
+    user=request.user
+    customer=user.customer_profile
+    all_orders = Order.objects.filter(owner=customer).exclude(order_status=Order.CART_STAGE)
+    context = {
+        'order': all_orders
+        }
+    return render(request, 'order.html', context)

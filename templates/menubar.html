@@ -13,7 +13,12 @@
             {% endif %}
 
             {% if user.is_authenticated %}
+            <li><a href="{% url 'track_order' %}">Orders</a></li>
+            {% endif %}
+
+            {% if user.is_authenticated %}
             <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a href="#" style="pointer-events: none;">Hello, {{ user.username }}</a></li>
             {% endif %}
         </ul>
     </nav>
